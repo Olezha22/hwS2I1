@@ -1,0 +1,5 @@
+4
+Car Paris 10 500
+Airplane Miami 4
+Car Berlin 300
+Airplane Tokyo 2
