@@ -35,6 +35,7 @@ public:
     virtual void print() const override;
     virtual void readFrom(std::istream& is) override;
     double getDistance() const;
+    
 
 };
 
@@ -55,3 +56,14 @@ public:
     int getFamilyMembers() const;
 
 };
+
+
+
+
+void readTravelsFromFile(const std::string& filename, Travel**& travels, int& n);
+
+void calculateCosts(Travel** travels, int n, double& totalCost, double& maxCar, double& maxAir);
+
+void printResults(Travel** travels, int n, double totalCost, double maxCar, double maxAir);
+
+//void writeToContainers(const std::string& filename, CarContainer& carContainer, AirContainer& airContainer, int& n);

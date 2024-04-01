@@ -17,6 +17,7 @@ public:
     virtual double calculatePrice() const abstract;
     virtual void readFrom(std::istream& is);
     virtual std::string getCarBrand() const abstract;
+    virtual bool isCar() const abstract;
 
 };
 
@@ -40,6 +41,7 @@ public:
     virtual double calculatePrice() const override;
     virtual void readFrom(std::istream& is) override;
     virtual std::string getCarBrand() const override;
+    virtual bool isCar() const override;
 };
 
 
@@ -59,4 +61,7 @@ public:
     virtual double calculatePrice() const override;
     virtual void readFrom(std::istream& is) override;
     virtual std::string getCarBrand() const override;
+    virtual bool isCar() const override;
+
 };
+

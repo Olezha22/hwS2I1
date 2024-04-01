@@ -24,12 +24,18 @@
     <ClCompile Include="travel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="container.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="transport.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="travel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="container.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

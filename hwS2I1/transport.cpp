@@ -22,7 +22,17 @@ std::string Car::getCarBrand() const {
 
 std::string Airplane::getCarBrand() const
 {
-    return "plane";
+    return airlineName;
+}
+
+bool Car::isCar() const
+{
+    return true;
+}
+
+bool Airplane::isCar() const
+{
+    return false;
 }
 
 void Transport::print() const {
@@ -64,7 +74,7 @@ void Car::print() const {
 
 double Car::calculatePrice() const {
     const double fuelPricePerLiter = 56; 
-    return fuel_consumption * fuelPricePerLiter;
+    return 0.1 * fuel_consumption * fuelPricePerLiter;
 }
 
 void Car::readFrom(std::istream& is) {
@@ -105,3 +115,6 @@ void Airplane::readFrom(std::istream& is) {
     Transport::readFrom(is);
     is >> ticketPrice;
 }
+
+
+

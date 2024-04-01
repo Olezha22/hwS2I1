@@ -1,4 +1,5 @@
 #include "travel.h"
+#include <fstream>
 
 Travel::Travel() 
     : transport(nullptr), destination("") 
@@ -33,6 +34,8 @@ void Travel::readFrom(std::istream& is) {
 const Transport* Travel::getTransport() const {
     return transport;
 }
+
+
 
 std::istream& operator>>(std::istream& is, Travel& T) {
     T.readFrom(is);
@@ -105,4 +108,61 @@ void AirTravel::readFrom(std::istream& is) {
 int AirTravel::getFamilyMembers() const {
     return familyMembers;
 }
+
+
+
+void readTravelsFromFile(const std::string& filename, Travel**& travels, int& n) {
+    std::ifstream file(filename);
+    file >> n;
+
+    travels = new Travel * [n];
+
+    std::string type, destination, typeCar, typePlane;
+    double distance;
+    int familyMembers;
+    double consumption, price;
+
+    for (int i = 0; i < n; ++i) {
+        file >> type >> destination;
+        if (type == "Car") {
+            file >> typeCar >> consumption >> distance;
+            travels[i] = new CarTravel(new Car(typeCar, consumption), destination, distance);
+        }
+        else if (type == "Airplane") {
+            file >> typePlane >> price >> familyMembers;
+            travels[i] = new AirTravel(new Airplane(typePlane, price), destination, familyMembers);
+        }
+    }
+
+    file.close();
+}
+
+void calculateCosts(Travel** travels, int n, double& totalCost, double& maxCar, double& maxAir) {
+    totalCost = 0, maxCar = 0, maxAir = 0;
+
+    for (int i = 0; i < n; ++i) {
+        totalCost += travels[i]->calculatePrice();
+        if (travels[i]->getTransport()->isCar()) {
+            if (travels[i]->calculatePrice() > maxCar) {
+                maxCar = travels[i]->calculatePrice();
+            }
+        }
+        else {
+            if (travels[i]->calculatePrice() > maxAir) {
+                maxAir = travels[i]->calculatePrice();
+            }
+        }
+    }
+}
+
+void printResults(Travel** travels, int n, double totalCost, double maxCar, double maxAir) {
+    for (int i = 0; i < n; ++i) {
+        travels[i]->print();
+    }
+
+    std::cout << "\n\nTotal Cost: " << totalCost << "\n";
+    std::cout << "Max car price: " << maxCar << "\n";
+    std::cout << "Max air price: " << maxAir << "\n\n";
+}
+
 

@@ -1,5 +1,5 @@
 4
-Car Paris 10 500
-Airplane Miami 4
-Car Berlin 300
-Airplane Tokyo 2
+Car Paris Tesla 10 500
+Airplane Paris AirLines 200 5
+Car NY Audi 6 1500
+Airplane NY BritishAir 500 10

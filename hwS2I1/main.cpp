@@ -1,44 +1,37 @@
 #include <iostream>
-#include <fstream>
 #include "travel.h"
 #include "transport.h"
+#include "container.h"
 
 int main() {
+
+
     int n;
-    std::ifstream file("travels.txt");
-    file >> n;
+    Travel** travels;
 
-    Travel** travels = new Travel * [n]; 
+    readTravelsFromFile("travels.txt", travels, n);
 
-    std::string type, destination;
-    double distance;
-    int familyMembers;
-    double consuption;
+    double totalCost, maxCar, maxAir;
 
-    for (int i = 0; i < n; ++i)
-    {
-        file >> type >> destination;
-        if (type == "Car") {
-            file >> consuption >> distance;
-            travels[i] = new CarTravel(new Car(), destination, distance); 
-        }
-        else if (type == "Airplane") {
-            file >> familyMembers;
-            travels[i] = new AirTravel(new Airplane(), destination, familyMembers); 
-        }
-    }
+    calculateCosts(travels, n, totalCost, maxCar, maxAir);
 
-    file.close();
+    printResults(travels, n, totalCost, maxCar, maxAir);
 
-
-    travels[0]->print();
-    
-
-    // Clean up allocated memory
     for (int i = 0; i < n; ++i) {
         delete travels[i];
     }
-    delete[] travels; // Видалення масиву вказівників
+    delete[] travels;
+
+
+
+    CarContainer car;
+    AirContainer air;
+    car.addCarTravel();
+    air.addAirTravel();
+    air.printAirTravels();
+    car.printCarTravels();
+    std::cout << "Lowest airTravel. members = " << air.findCheapMembers() << "\n";
+    std::cout << "Highest carTravel. car = " << car.getCarFromHighest()->getCarBrand() << "\n";
 
     return 0;
 }
